@@ -1,7 +1,10 @@
 package de.conrad.codeworkshop.factory.services.factory;
 
-import de.conrad.codeworkshop.factory.services.order.api.Order;
-import org.springframework.beans.factory.annotation.Autowired;
+import de.conrad.codeworkshop.factory.services.order.api.OrderCreateRequest;
+import lombok.AccessLevel;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,25 +16,20 @@ import static org.springframework.http.HttpStatus.OK;
 /**
  * @author Andreas Hartmann
  */
-@RestController("factoryController")
+@RestController
 @RequestMapping("/factory")
-public class Controller {
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
+public class FactoryController {
 
-    private final Service factoryService;
-
-    @Autowired
-    public Controller(final Service factoryService) {
-
-        this.factoryService = factoryService;
-    }
+    FactoryService factoryService;
 
     @PostMapping(value = "/enqueue")
-    public final HttpStatus enqueue(final Order order) {
-
+    public final HttpStatus enqueue(@NonNull final OrderCreateRequest orderCreateRequest) {
         HttpStatus response = OK;
 
         try {
-            factoryService.enqueue(order);
+            factoryService.enqueue(orderCreateRequest);
         } catch (final Exception exception) {
             response = INTERNAL_SERVER_ERROR;
         }

@@ -1,36 +1,49 @@
 package de.conrad.codeworkshop.factory.services.order.api;
 
+import lombok.Builder;
+import lombok.Data;
+import org.springframework.core.annotation.Order;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotNull;
 
-import static de.conrad.codeworkshop.factory.services.order.api.OrderNumber.*;
+import java.util.UUID;
+
+
 import static de.conrad.codeworkshop.factory.services.order.api.OrderStatus.ACCEPTED;
 import static de.conrad.codeworkshop.factory.services.order.api.OrderStatus.DECLINED;
 
 /**
  * @author Andreas Hartmann
  */
+@Builder
+@Data
 public class OrderConfirmation {
 
-    public static final OrderConfirmation BLANK_ORDER_CONFIRMATION = new OrderConfirmation(null);
+    OrderStatus status;
+    UUID orderNumber;
 
-    private OrderStatus status;
-    private OrderNumber orderNumber;
-
-    public OrderConfirmation(final OrderNumber orderNumber) {
-        this.orderNumber = generate();
-
-        this.status = null == orderNumber ? DECLINED : ACCEPTED;
+    public static OrderConfirmation declined() {
+        return OrderConfirmation.builder()
+                .orderNumber(UUID.randomUUID())
+                .status(DECLINED)
+                .build();
     }
 
-    @Nullable
-    public OrderNumber getOrderNumber() {
-        return orderNumber;
+    public static OrderConfirmation accepted() {
+        return OrderConfirmation.builder()
+                .orderNumber(UUID.randomUUID())
+                .status(ACCEPTED)
+                .build();
     }
 
-    @NotNull
-    public OrderStatus getStatus() {
-        return status;
-    }
+//    @Nullable
+//    public OrderNumber getOrderNumber() {
+//        return orderNumber;
+//    }
+//
+//    @NotNull
+//    public OrderStatus getStatus() {
+//        return status;
+//    }
 }
