@@ -1,17 +1,13 @@
-package de.conrad.codeworkshop.factory.services.order.api;
+package de.conrad.codeworkshop.factory.order.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.core.annotation.Order;
-import org.springframework.lang.Nullable;
-
-import javax.validation.constraints.NotNull;
 
 import java.util.UUID;
 
+import static de.conrad.codeworkshop.factory.order.dto.OrderStatus.ACCEPTED;
+import static de.conrad.codeworkshop.factory.order.dto.OrderStatus.DECLINED;
 
-import static de.conrad.codeworkshop.factory.services.order.api.OrderStatus.ACCEPTED;
-import static de.conrad.codeworkshop.factory.services.order.api.OrderStatus.DECLINED;
 
 /**
  * @author Andreas Hartmann
@@ -36,14 +32,4 @@ public class OrderConfirmation {
                 .status(ACCEPTED)
                 .build();
     }
-
-//    @Nullable
-//    public OrderNumber getOrderNumber() {
-//        return orderNumber;
-//    }
-//
-//    @NotNull
-//    public OrderStatus getStatus() {
-//        return status;
-//    }
 }

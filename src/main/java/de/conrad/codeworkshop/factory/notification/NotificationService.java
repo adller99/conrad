@@ -1,6 +1,6 @@
-package de.conrad.codeworkshop.factory.services.notification;
+package de.conrad.codeworkshop.factory.notification;
 
-import de.conrad.codeworkshop.factory.services.order.api.OrderCreateRequest;
+import de.conrad.codeworkshop.factory.order.api.OrderCreateRequest;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
