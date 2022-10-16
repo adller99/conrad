@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.7.2")
+    }
+}
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id "org.springframework.boot" version "2.7.2"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+//    id "nebula.lint" version "16.0.2"
+}
+
+bootJar {
+    baseName = 'gs-spring-boot'
+    version = '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+//gradleLint.rules = ['all-dependency']
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+dependencies {
+    implementation group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.24"
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.hibernate:hibernate-validator:6.0.10.Final'
+
+    testImplementation("junit:junit")
+}
